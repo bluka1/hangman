@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { HangmanState, QuoteData } from './types';
+import { HangmanState, QuoteData } from '../../models/hangmanStoreTypes';
 
 const initialState: HangmanState = {
   duration: 0,
