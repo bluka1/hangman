@@ -1,13 +1,13 @@
 export type QuoteData = {
   quote: string;
-  quoteId: number;
+  quoteId: string;
   quoteLength: number;
   uniqueCharacters: string[];
 };
 
 export interface HangmanState {
   quote: string | null;
-  quoteId: number | null;
+  quoteId: string | null;
   quoteLength: number | null;
   errors: number;
   uniqueCharacters: string[];
