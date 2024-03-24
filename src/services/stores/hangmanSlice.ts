@@ -5,11 +5,11 @@ import { HangmanState, QuoteData } from '../../models/hangmanStoreTypes';
 const initialState: HangmanState = {
   duration: 0,
   errors: 5,
-  quote: null,
-  quoteId: null,
-  quoteLength: 0,
+  quote: '',
+  quoteId: '',
+  length: 0,
   uniqueCharacters: [],
-  userName: null,
+  userName: '',
 };
 
 export const hangmanSlice = createSlice({
@@ -25,7 +25,7 @@ export const hangmanSlice = createSlice({
     setQuote: (state, action: PayloadAction<QuoteData>) => {
       state.quote = action.payload.quote;
       state.quoteId = action.payload.quoteId;
-      state.quoteLength = action.payload.quoteLength;
+      state.length = action.payload.quoteLength;
       state.uniqueCharacters = action.payload.uniqueCharacters;
     },
     setUsername: (state, action: PayloadAction<string>) => {
