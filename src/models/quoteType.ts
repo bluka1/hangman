@@ -4,7 +4,7 @@ export interface Quote {
   content: string;
   dateAdded: string;
   dateModified: string;
-  length: 70;
+  length: number;
   tags: string[];
   _id: string;
 }

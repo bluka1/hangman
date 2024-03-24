@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { resolveResponse } from '../../utils/helpers';
+import { GameScore } from '../../models';
 
 export const scoresApi = axios.create({
   baseURL:
@@ -12,8 +13,13 @@ export const retrieveScores = () => {
     .then((response) => resolveResponse(response));
 };
 
-export const postScores = () => {
+export const postScore = (score: GameScore) => {
   return scoresApi
-    .post('/highscores')
+    .post('/highscores', {
+      body: score,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     .then((response) => resolveResponse(response));
 };

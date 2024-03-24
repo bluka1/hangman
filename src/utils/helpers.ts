@@ -1,5 +1,5 @@
 export async function resolveResponse(response: any) {
-  if (response.status === 200) return response;
+  if (response.status === 200 || response.status === 201) return response;
   if (response.status === 404)
     throw new Error('Word for hangman game not found.');
   throw new Error('Something went wrong :(');

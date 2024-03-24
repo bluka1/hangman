@@ -5,12 +5,16 @@ export type QuoteData = {
   uniqueCharacters: string[];
 };
 
-export interface HangmanState {
-  quote: string | null;
-  quoteId: string | null;
-  quoteLength: number | null;
+export type HangmanStateBase = {
+  quoteId: string;
+  length: number;
   errors: number;
-  uniqueCharacters: string[];
-  userName: string | null;
+  userName: string;
   duration: number;
-}
+};
+
+export type HangmanState = HangmanStateBase & {
+  quote: string;
+  uniqueCharacters: string[];
+};
+export type GameScore = HangmanStateBase & { uniqueCharacters: number };

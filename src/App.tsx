@@ -31,7 +31,7 @@ function App() {
       <h1 className="app-title">Hangman</h1>
       <p>quote: {hangmanState.quote}</p>
       <p>quoteId: {hangmanState.quoteId}</p>
-      <p>quoteLength: {hangmanState.quoteLength}</p>
+      <p>quoteLength: {hangmanState.length}</p>
       <p>uniqueChars: {hangmanState.uniqueCharacters}</p>
     </div>
   );
