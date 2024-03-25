@@ -1,38 +1,28 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { retrieveQuote } from './services/api';
-import { setQuote } from './services/stores/hangmanSlice';
-import { RootState } from './services/stores/store';
-import { Quote } from './models';
-import { extractUniqueLetters } from './utils';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
+
+import { LoginPage, GamePage, GameScoresPage } from './pages';
+import { withProtectedRoute } from './components';
 
 function App() {
-  const hangmanState = useSelector((state: RootState) => state.hangman);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    retrieveQuote()
-      .then(({ data }: { data: Quote }) => {
-        dispatch(
-          setQuote({
-            quote: data.content,
-            quoteId: data._id,
-            quoteLength: data.length,
-            uniqueCharacters: extractUniqueLetters(data.content),
-          })
-        );
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
+  const ProtectedGameScoresPage = withProtectedRoute(GameScoresPage);
+  const ProtectedGamePage = withProtectedRoute(GamePage);
   return (
     <div className="app">
-      <h1 className="app-title">Hangman</h1>
-      <p>quote: {hangmanState.quote}</p>
-      <p>quoteId: {hangmanState.quoteId}</p>
-      <p>quoteLength: {hangmanState.length}</p>
-      <p>uniqueChars: {hangmanState.uniqueCharacters}</p>
+      <h1 className="app-title">Hangman Game</h1>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/game" element={<ProtectedGamePage />} />
+          <Route path="/scores" element={<ProtectedGameScoresPage />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
