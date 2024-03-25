@@ -16,14 +16,13 @@ export function extractUniqueLetters(quote: string): string[] {
 }
 
 export function normalizeScores(highscores: HighscoresRecord[]): Score[] {
-  const scores = highscores.reduce((acc: Score[], record: HighscoresRecord) => {
+  return highscores.reduce((acc: Score[], record: HighscoresRecord) => {
     acc.push({
       userName: record.userName,
       score: calculateScore(record.errors),
     });
     return acc;
   }, []);
-  return sortScores(scores);
 }
 
 export function sortScores(scores: Score[]): Score[] {
