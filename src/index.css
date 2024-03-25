@@ -7,15 +7,75 @@
 }
 
 :root {
+  --text-color-light: whitesmoke;
+  --border-color-light: whitesmoke;
+  --background-color-dark: #242424;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color-light);
+  background-color: var(--background-color-dark);
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
+  display: flex;
+  height: 100%;
   min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-grow: 1;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.app-title {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-bottom: 2rem;
+}
+
+.page-description {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.highscores-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  max-width: 478px;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+.highscores-table caption {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.highscores-table th,
+.highscores-table td {
+  padding: 0.25rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.highscores-table tbody tr:nth-child(odd) {
+  background-color: #3e3e3e;
 }
