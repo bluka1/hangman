@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import hangmanReducer from './hangmanSlice';
+import scoresReducer from './scoresSlice';
 
 export const store = configureStore({
   reducer: {
     hangman: hangmanReducer,
+    scores: scoresReducer,
   },
 });
 
