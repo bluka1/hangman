@@ -5,11 +5,11 @@ import {
   Routes,
 } from 'react-router-dom';
 
-import { LoginPage, GamePage, GameScoresPage } from './pages';
+import { LoginPage, GamePage, ScoresPage } from './pages';
 import { withProtectedRoute } from './components';
 
 function App() {
-  const ProtectedGameScoresPage = withProtectedRoute(GameScoresPage);
+  const ProtectedGameScoresPage = withProtectedRoute(ScoresPage);
   const ProtectedGamePage = withProtectedRoute(GamePage);
   return (
     <div className="app">

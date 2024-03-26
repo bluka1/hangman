@@ -11,23 +11,23 @@ const LoginPage = () => {
     return <Navigate to="/game" />;
   }
 
+  const description = (
+    <>
+      <p className="page-description">
+        Dear user, welcome to Hangman game made by{' '}
+        <a href="http://bluka1.pro/" target="_blank">
+          bluka1
+        </a>
+        .
+      </p>
+      <p className="page-description">
+        Please enter your username to play the game.
+      </p>
+    </>
+  );
+
   return (
-    <Page
-      description={
-        <>
-          <p className="page-description">
-            Dear user, welcome to Hangman game made by{' '}
-            <a href="http://bluka1.pro/" target="_blank">
-              bluka1
-            </a>
-            .
-          </p>
-          <p className="page-description">
-            Please enter your username to play the game.
-          </p>
-        </>
-      }
-    >
+    <Page description={description}>
       <UsernameForm />
     </Page>
   );

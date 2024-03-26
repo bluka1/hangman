@@ -7,10 +7,18 @@ import { HighscoresTable, Page } from '../components';
 import { normalizeScores, sortScores } from '../utils/helpers';
 import { RootState } from '../services/stores';
 import { HighscoresRecord } from '../models';
+import { Navigate } from 'react-router-dom';
 
-const GameScoresPage = () => {
+const ScoresPage = () => {
+  const hangmanState = useSelector((state: RootState) => state.hangman);
   const scores = useSelector((state: RootState) => state.scores.scores);
   const dispatch = useDispatch();
+
+  if (!hangmanState.gameFinished) return <Navigate to="/game" />;
+
+  const description = `Game finished. You ${
+    hangmanState.win ? 'won :)' : 'lost :('
+  }. Take a look at the results table`;
 
   useEffect(() => {
     retrieveScores()
@@ -21,10 +29,10 @@ const GameScoresPage = () => {
   }, []);
 
   return (
-    <Page description="Game finished.">
+    <Page description={description}>
       {scores && <HighscoresTable highscores={scores} />}
     </Page>
   );
 };
 
-export default GameScoresPage;
+export default ScoresPage;

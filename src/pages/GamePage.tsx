@@ -2,36 +2,77 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Quote } from '../models';
 import { retrieveQuote } from '../services/api';
-import { setQuote } from '../services/stores/hangmanSlice';
+import {
+  setGuessedLetters,
+  setQuote,
+  resetState,
+} from '../services/stores/hangmanSlice';
 import { RootState } from '../services/stores/store';
 import { extractUniqueLetters } from '../utils';
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { GameStatus, LetterBox, Page } from '../components';
 
 const GamePage = () => {
   const hangmanState = useSelector((state: RootState) => state.hangman);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   retrieveQuote()
-  //     .then(({ data }: { data: Quote }) => {
-  //       dispatch(
-  //         setQuote({
-  //           quote: data.content,
-  //           quoteId: data._id,
-  //           quoteLength: data.length,
-  //           uniqueCharacters: extractUniqueLetters(data.content),
-  //         })
-  //       );
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
+  const description =
+    'The game has started. Start typing on your keyboard or just press the letters you see on the screen. Only letters allowed!';
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    const guess = e.key.toLowerCase();
+    const isLetter = /[a-z]/.test(guess);
+
+    if (isLetter) {
+      dispatch(setGuessedLetters(guess));
+    } else return;
+  };
+
+  const getQuote = async (): Promise<any> => {
+    retrieveQuote()
+      .then(({ data }: { data: Quote }) => {
+        dispatch(
+          setQuote({
+            quote: data.content,
+            quoteId: data._id,
+            quoteLength: data.length,
+            uniqueCharacters: extractUniqueLetters(data.content),
+          })
+        );
+      })
+      .catch((err) => console.error(err));
+  };
+
+  function restartGame(event: any): any {
+    dispatch(resetState());
+    getQuote();
+  }
+
+  useEffect(() => {
+    getQuote();
+    window.addEventListener('keypress', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keypress', handleKeyPress);
+    };
+  }, []);
+
+  if (hangmanState.gameFinished === true) return <Navigate to="/scores" />;
+
   return (
-    <div>
-      GamePage
-      <p>
-        <Link to="/scores">SCORES</Link>
-      </p>
-    </div>
+    <Page description={description}>
+      <GameStatus />
+      <button onClick={restartGame}>RESTART GAME</button>
+      <div className="hangman-quote">
+        {hangmanState.quote ? (
+          <>
+            {hangmanState.quote.split('').map((char) => (
+              <LetterBox key={Math.random().toFixed(9)} letter={char} />
+            ))}
+          </>
+        ) : null}
+      </div>
+    </Page>
   );
 };
 

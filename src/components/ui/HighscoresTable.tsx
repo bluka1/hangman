@@ -12,7 +12,7 @@ const HighscoresTable = ({ highscores }: { highscores: Score[] }) => {
       </thead>
       <tbody>
         {highscores.map((score) => (
-          <tr>
+          <tr key={Math.random().toFixed(9)}>
             <td>{score.userName}</td>
             <td>{score.score.toFixed(3)}</td>
           </tr>

@@ -32,3 +32,7 @@ export function sortScores(scores: Score[]): Score[] {
 export function calculateScore(numberOfErrors: number): number {
   return 100 / (1 + numberOfErrors);
 }
+
+export function makeHangmanPuzzle(quote: string): string[] {
+  return quote.split('').map((char) => '*');
+}
