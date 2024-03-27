@@ -62,7 +62,6 @@ const GamePage = () => {
   return (
     <Page description={description}>
       <GameStatus />
-      <button onClick={restartGame}>RESTART GAME</button>
       <div className="hangman-quote">
         {hangmanState.quote ? (
           <>
@@ -72,6 +71,9 @@ const GamePage = () => {
           </>
         ) : null}
       </div>
+      <button className="reset-game" onClick={restartGame}>
+        RESTART GAME
+      </button>
     </Page>
   );
 };

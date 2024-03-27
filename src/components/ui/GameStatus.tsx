@@ -32,9 +32,14 @@ const GameStatus = () => {
   recalculateGameStatus();
 
   return (
-    <p className="game-status">
-      <b>Game status: playing - Number of errors: {hangmanState.errors} / 6</b>
-    </p>
+    <>
+      <p className="game-status">
+        <b>Game status: playing</b>
+      </p>
+      <p className="game-status">
+        <b>Number of errors: {hangmanState.errors} / 6</b>
+      </p>
+    </>
   );
 };
 

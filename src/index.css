@@ -44,8 +44,8 @@ body {
 }
 
 .game-status {
-  font-size: 2rem;
-  padding: 2rem 0;
+  font-size: 1rem;
+  padding: 1rem 0;
   text-align: center;
 }
 
@@ -61,10 +61,17 @@ body {
   white-space: wrap;
 }
 
+.reset-game {
+  display: block;
+  margin: 3rem auto 1rem auto;
+  padding: 0.5rem 2rem;
+}
+
 .hangman-quote {
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
+  justify-content: center;
 }
 
 .highscores-table {
@@ -93,9 +100,12 @@ body {
 
 .letter-box {
   align-items: center;
-  border-bottom: 1px solid var(--border-color-light);
   display: flex;
-  font-size: 3rem;
+  font-size: 1.25rem;
   justify-content: center;
   margin: 0.5rem;
+}
+
+.underline {
+  border-bottom: 1px solid var(--border-color-light);
 }

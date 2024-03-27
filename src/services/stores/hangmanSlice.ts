@@ -55,7 +55,16 @@ export const hangmanSlice = createSlice({
     setWin: (state, action: PayloadAction<boolean>) => {
       state.win = action.payload;
     },
-    resetState: (state) => {},
+    resetState: (state) => {
+      state.gameFinished = false;
+      state.guessedLetters = [];
+      state.length = 0;
+      state.quote = '';
+      state.quoteId = '';
+      state.uniqueCharacters = [];
+      state.win = false;
+      state.errors = 0;
+    },
   },
 });
 
