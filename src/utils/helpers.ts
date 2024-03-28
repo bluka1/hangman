@@ -33,6 +33,12 @@ export function calculateScore(numberOfErrors: number): number {
   return 100 / (1 + numberOfErrors);
 }
 
-export function makeHangmanPuzzle(quote: string): string[] {
-  return quote.split('').map((char) => '*');
+export function calculateScoreAdvanced(
+  length: number,
+  uniqueCharacters: number,
+  errors: number,
+  duration: number
+) {
+  const errorPenalty = 1 / (1 + errors);
+  return (100 * uniqueCharacters * duration * length * errorPenalty) / 1000;
 }
