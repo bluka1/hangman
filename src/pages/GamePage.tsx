@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Quote } from '../models';
-import { postScore, retrieveQuote } from '../services/api';
+import { HighscoresRecord, Quote } from '../models';
+import { postScore, retrieveQuote, retrieveScores } from '../services/api';
 import {
   setGuessedLetters,
   setQuote,
@@ -12,6 +12,8 @@ import { RootState } from '../services/stores/store';
 import { extractUniqueLetters } from '../utils';
 import { Navigate } from 'react-router-dom';
 import { Button, GameStatus, LetterBox, Page } from '../components';
+import { setScores } from '../services/stores/scoresSlice';
+import { normalizeScores, sortScores } from '../utils/helpers';
 
 const GamePage = () => {
   const hangmanState = useSelector((state: RootState) => state.hangman);
@@ -20,40 +22,6 @@ const GamePage = () => {
 
   const description =
     'The game has started. Start typing on your keyboard or just press the letters you see on the screen. Only letters allowed!';
-
-  const handleKeyPress = (e: KeyboardEvent) => {
-    const guess = e.key.toLowerCase();
-    const isLetter = /[a-z]/.test(guess);
-
-    if (isLetter) {
-      dispatch(setGuessedLetters(guess));
-    } else return;
-  };
-
-  const getQuote = async (): Promise<any> => {
-    retrieveQuote()
-      .then(({ data }: { data: Quote }) => {
-        dispatch(
-          setQuote({
-            quote: data.content,
-            quoteId: data._id,
-            quoteLength: data.length,
-            uniqueCharacters: extractUniqueLetters(data.content),
-          })
-        );
-        dispatch(setGameStartedAt(Date.now()));
-      })
-      .catch((err) => console.error(err));
-  };
-
-  function visitSoresPage() {
-    setRedirect(true);
-  }
-
-  function restartGame(): void {
-    dispatch(resetState());
-    getQuote();
-  }
 
   useEffect(() => {
     if (!hangmanState.gameFinished) {
@@ -81,9 +49,48 @@ const GamePage = () => {
         uniqueCharacters: hangmanState.uniqueCharacters.length,
       });
     }
+    retrieveScores()
+      .then(({ data }: { data: HighscoresRecord[] }) => {
+        dispatch(setScores(sortScores(normalizeScores(data))));
+      })
+      .catch((err) => console.error(err));
   }, [hangmanState.win]);
 
   if (redirect) return <Navigate to="/scores" />;
+
+  function handleKeyPress(e: KeyboardEvent) {
+    const guess = e.key.toLowerCase();
+    const isLetter = /[a-z]/.test(guess);
+
+    if (isLetter) {
+      dispatch(setGuessedLetters(guess));
+    } else return;
+  }
+
+  async function getQuote(): Promise<any> {
+    retrieveQuote()
+      .then(({ data }: { data: Quote }) => {
+        dispatch(
+          setQuote({
+            quote: data.content,
+            quoteId: data._id,
+            quoteLength: data.length,
+            uniqueCharacters: extractUniqueLetters(data.content),
+          })
+        );
+        dispatch(setGameStartedAt(Date.now()));
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function visitSoresPage() {
+    setRedirect(true);
+  }
+
+  function restartGame(): void {
+    dispatch(resetState());
+    getQuote();
+  }
 
   return (
     <Page description={description}>
@@ -114,7 +121,7 @@ const GamePage = () => {
           handleClick={() => visitSoresPage()}
         />
       ) : null}
-      <div className="play-again">
+      <div className="center-align">
         <Button
           isDisabled={false}
           text="RESTART GAME"

@@ -3,8 +3,6 @@ export {
   hangmanSlice,
   setQuote,
   setUsername,
-  setDuration,
-  decrementErrors,
   setGuessedLetters,
   setGameStartedAt,
   setGameFinished,

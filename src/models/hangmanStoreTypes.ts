@@ -10,7 +10,6 @@ export type HangmanStateBase = {
   length: number;
   errors: number;
   userName: string;
-  duration: number;
 };
 
 export type HangmanState = HangmanStateBase & {
@@ -22,4 +21,7 @@ export type HangmanState = HangmanStateBase & {
   gameFinished: boolean;
   win: boolean;
 };
-export type GameScore = HangmanStateBase & { uniqueCharacters: number };
+export type GameScore = HangmanStateBase & {
+  uniqueCharacters: number;
+  duration: number;
+};

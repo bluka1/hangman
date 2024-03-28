@@ -1,4 +1,4 @@
-import './Button.css';
+import { FormEvent } from 'react';
 
 const Button = ({
   text,
@@ -7,7 +7,7 @@ const Button = ({
 }: {
   text: string;
   isDisabled: boolean;
-  handleClick: () => void;
+  handleClick: (e: FormEvent) => void | (() => void);
 }) => {
   return (
     <button onClick={handleClick} className="button" disabled={isDisabled}>

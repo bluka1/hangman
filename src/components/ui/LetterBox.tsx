@@ -7,7 +7,7 @@ const LetterBox = ({ letter }: { letter: string }) => {
   const guessedLetters = useSelector(
     (state: RootState) => state.hangman.guessedLetters
   );
-  const testLetter = () => {
+  const markLetter = () => {
     if (
       guessedLetters.includes(letter.toLowerCase()) ||
       (letter.charCodeAt(0) >= 32 && letter.charCodeAt(0) <= 64)
@@ -18,7 +18,7 @@ const LetterBox = ({ letter }: { letter: string }) => {
       return '*';
     }
   };
-  const letterSign = testLetter();
+  const letterSign = markLetter();
   return <span className={`${className} letter-box`}>{letterSign}</span>;
 };
 

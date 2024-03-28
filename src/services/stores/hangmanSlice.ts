@@ -3,7 +3,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { HangmanState, QuoteData } from '../../models/hangmanStoreTypes';
 
 const initialState: HangmanState = {
-  duration: 0,
   errors: 0,
   quote: '',
   quoteId: '',
@@ -21,12 +20,6 @@ export const hangmanSlice = createSlice({
   name: 'hangman',
   initialState,
   reducers: {
-    decrementErrors: (state) => {
-      state.errors--;
-    },
-    setDuration: (state, action: PayloadAction<number>) => {
-      state.duration = action.payload;
-    },
     setQuote: (state, action: PayloadAction<QuoteData>) => {
       state.quote = action.payload.quote;
       state.quoteId = action.payload.quoteId;
@@ -67,8 +60,6 @@ export const hangmanSlice = createSlice({
 export const {
   setQuote,
   setUsername,
-  setDuration,
-  decrementErrors,
   setGuessedLetters,
   setGameStartedAt,
   setGameFinished,

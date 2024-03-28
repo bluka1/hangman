@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 import { setUsername } from '../../services/stores';
 import { Button } from '..';
 
-import './UsernameForm.css';
-
 const UsernameForm = () => {
   const [formUsername, setFormUsername] = useState<string>('');
   const dispatch = useDispatch();
@@ -32,7 +30,11 @@ const UsernameForm = () => {
         onChange={handleInputChange}
         className="username-form-input"
       />
-      <Button text="SUBMIT" isDisabled={!formUsername.trim()} />
+      <Button
+        text="SUBMIT"
+        isDisabled={!formUsername.trim()}
+        handleClick={handleOnSubmit}
+      />
     </form>
   );
 };
