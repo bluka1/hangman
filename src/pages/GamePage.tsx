@@ -1,20 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Quote } from '../models';
-import { retrieveQuote } from '../services/api';
+import { postScore, retrieveQuote } from '../services/api';
 import {
   setGuessedLetters,
   setQuote,
+  setGameStartedAt,
   resetState,
 } from '../services/stores/hangmanSlice';
 import { RootState } from '../services/stores/store';
 import { extractUniqueLetters } from '../utils';
 import { Navigate } from 'react-router-dom';
-import { GameStatus, LetterBox, Page } from '../components';
+import { Button, GameStatus, LetterBox, Page } from '../components';
 
 const GamePage = () => {
   const hangmanState = useSelector((state: RootState) => state.hangman);
   const dispatch = useDispatch();
+  const [redirect, setRedirect] = useState(false);
 
   const description =
     'The game has started. Start typing on your keyboard or just press the letters you see on the screen. Only letters allowed!';
@@ -39,29 +41,54 @@ const GamePage = () => {
             uniqueCharacters: extractUniqueLetters(data.content),
           })
         );
+        dispatch(setGameStartedAt(Date.now()));
       })
       .catch((err) => console.error(err));
   };
 
-  function restartGame(event: any): any {
+  function visitSoresPage() {
+    setRedirect(true);
+  }
+
+  function restartGame(): void {
     dispatch(resetState());
     getQuote();
   }
 
   useEffect(() => {
-    getQuote();
+    if (!hangmanState.gameFinished) {
+      getQuote();
+    }
     window.addEventListener('keypress', handleKeyPress);
+
+    if (hangmanState.gameFinished) {
+      window.removeEventListener('keypress', handleKeyPress);
+    }
 
     return () => {
       window.removeEventListener('keypress', handleKeyPress);
     };
-  }, []);
+  }, [hangmanState.gameFinished]);
 
-  if (hangmanState.gameFinished === true) return <Navigate to="/scores" />;
+  useEffect(() => {
+    if (hangmanState.gameFinished === true && hangmanState.win === true) {
+      postScore({
+        quoteId: hangmanState.quoteId,
+        length: hangmanState.length,
+        errors: hangmanState.errors,
+        userName: hangmanState.userName,
+        duration: Date.now() - hangmanState.gameStartedAt,
+        uniqueCharacters: hangmanState.uniqueCharacters.length,
+      });
+    }
+  }, [hangmanState.win]);
+
+  if (redirect) return <Navigate to="/scores" />;
 
   return (
     <Page description={description}>
       <GameStatus />
+
       <div className="hangman-quote">
         {hangmanState.quote ? (
           <>
@@ -71,9 +98,29 @@ const GamePage = () => {
           </>
         ) : null}
       </div>
-      <button className="reset-game" onClick={restartGame}>
-        RESTART GAME
-      </button>
+
+      <div className="hangman-term">
+        {hangmanState.gameFinished && !hangmanState.win ? (
+          <>
+            <p>The hangman term was:</p>
+            <p>{hangmanState.quote}</p>
+          </>
+        ) : null}
+      </div>
+      {hangmanState.gameFinished ? (
+        <Button
+          isDisabled={false}
+          text="VISIT SCORES PAGE"
+          handleClick={() => visitSoresPage()}
+        />
+      ) : null}
+      <div className="play-again">
+        <Button
+          isDisabled={false}
+          text="RESTART GAME"
+          handleClick={restartGame}
+        />
+      </div>
     </Page>
   );
 };

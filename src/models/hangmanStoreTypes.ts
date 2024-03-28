@@ -18,7 +18,6 @@ export type HangmanState = HangmanStateBase & {
   uniqueCharacters: string[];
   guessedLetters: string[];
   gameStartedAt: number;
-  gameFinishedAt: number;
   maxErrors: number;
   gameFinished: boolean;
   win: boolean;

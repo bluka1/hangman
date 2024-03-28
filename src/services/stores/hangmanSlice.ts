@@ -12,7 +12,6 @@ const initialState: HangmanState = {
   userName: '',
   guessedLetters: [],
   gameStartedAt: 0,
-  gameFinishedAt: 0,
   maxErrors: 6,
   gameFinished: false,
   win: false,
@@ -46,9 +45,6 @@ export const hangmanSlice = createSlice({
     setGameStartedAt: (state, action: PayloadAction<number>) => {
       state.gameStartedAt = action.payload;
     },
-    setGameFinishedAt: (state, action: PayloadAction<number>) => {
-      state.gameFinishedAt = action.payload;
-    },
     setGameFinished: (state, action: PayloadAction<boolean>) => {
       state.gameFinished = action.payload;
     },
@@ -75,7 +71,6 @@ export const {
   decrementErrors,
   setGuessedLetters,
   setGameStartedAt,
-  setGameFinishedAt,
   setGameFinished,
   setWin,
   resetState,

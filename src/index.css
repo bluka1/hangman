@@ -61,10 +61,16 @@ body {
   white-space: wrap;
 }
 
-.reset-game {
+.action-button {
   display: block;
-  margin: 3rem auto 1rem auto;
+  margin: 2rem auto 1rem auto;
   padding: 0.5rem 2rem;
+}
+
+.hangman-term {
+  font-size: 1.5rem;
+  margin: 2rem auto;
+  text-align: center;
 }
 
 .hangman-quote {
@@ -108,4 +114,9 @@ body {
 
 .underline {
   border-bottom: 1px solid var(--border-color-light);
+}
+
+.play-again {
+  margin: 1rem auto;
+  text-align: center;
 }

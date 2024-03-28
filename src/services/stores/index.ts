@@ -7,7 +7,6 @@ export {
   decrementErrors,
   setGuessedLetters,
   setGameStartedAt,
-  setGameFinishedAt,
   setGameFinished,
   setWin,
   resetState,

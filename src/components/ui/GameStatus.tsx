@@ -1,10 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setGameFinished, setWin } from '../../services/stores';
+import { useEffect } from 'react';
 
 const GameStatus = () => {
   const dispatch = useDispatch();
 
   const hangmanState = useSelector((state: RootState) => state.hangman);
+  const wonOrLost = hangmanState.win ? 'YOU WON!' : 'YOU LOST :(';
+  const gameStatus = hangmanState.gameFinished ? `${wonOrLost}` : 'playing';
+
   const recalculateGameStatus = () => {
     let count = 0;
     hangmanState.quote.split('').forEach((letter) => {
@@ -29,12 +33,14 @@ const GameStatus = () => {
     }
   };
 
-  recalculateGameStatus();
+  useEffect(() => {
+    recalculateGameStatus();
+  }, [hangmanState.guessedLetters, hangmanState.errors]);
 
   return (
     <>
       <p className="game-status">
-        <b>Game status: playing</b>
+        <b>Game status: {gameStatus}</b>
       </p>
       <p className="game-status">
         <b>Number of errors: {hangmanState.errors} / 6</b>
