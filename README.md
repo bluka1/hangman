@@ -7,6 +7,7 @@ Try this game out by visiting this [link](https://hangman-cyan-seven.vercel.app/
 ## Installation
 
 - clone the repo locally - run `git clone` + link to this repo
+- change directory to cloned repo - run `cd hangman`
 - run `npm ci`
 
 ## Running the app locally
