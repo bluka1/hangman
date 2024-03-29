@@ -1,1 +1,8 @@
-export { resolveResponse, extractUniqueLetters } from './helpers';
+export {
+  resolveResponse,
+  extractUniqueLetters,
+  calculateScoreAdvanced,
+  calculateScore,
+  sortScores,
+  normalizeScores,
+} from './helpers';

@@ -8,7 +8,9 @@
 
 :root {
   --text-color-light: whitesmoke;
+  --border-color-blue: #2eb3fa;
   --border-color-light: whitesmoke;
+  --border-color-warning: rgb(242, 242, 92);
   --background-color-dark: #242424;
   --background-color-light: #383838;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -115,6 +117,16 @@ body {
   margin: 0.5rem;
 }
 
+.loading {
+  animation: spin 1s linear infinite;
+  border: 10px solid var(--border-color-light);
+  border-top: 6px solid var(--background-color-light);
+  border-radius: 50%;
+  height: 50px;
+  margin: 2rem auto;
+  width: 50px;
+}
+
 .page {
   max-width: 100%;
   padding-bottom: 2rem;
@@ -128,7 +140,7 @@ body {
 }
 
 .underline {
-  border-bottom: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-color-blue);
 }
 
 .username-form {
@@ -151,4 +163,18 @@ body {
   margin-bottom: 1rem;
   border-radius: 0.25rem;
   padding: 0.3125rem 0.5rem;
+}
+
+.warning-border {
+  border: 1px solid var(--border-color-warning);
+  padding: 1rem 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

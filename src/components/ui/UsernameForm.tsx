@@ -7,18 +7,25 @@ import { Button } from '..';
 const UsernameForm = () => {
   const [formUsername, setFormUsername] = useState<string>('');
   const dispatch = useDispatch();
+  const userNameRegex = /^[a-zA-Z]{1,20}$/;
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!formUsername.trim()) return;
+    if (!userNameRegex.test(formUsername.trim())) return;
     dispatch(setUsername(formUsername));
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormUsername(e.target.value);
   };
 
+  console.log('test regex: ', userNameRegex.test(formUsername));
+
   return (
-    <form onSubmit={handleOnSubmit} className="username-form">
+    <form
+      onSubmit={handleOnSubmit}
+      className="username-form"
+      autoComplete="off"
+    >
       <label htmlFor="username" className="username-form-input-label">
         Username:
       </label>
@@ -29,10 +36,11 @@ const UsernameForm = () => {
         value={formUsername}
         onChange={handleInputChange}
         className="username-form-input"
+        autoComplete="off"
       />
       <Button
         text="SUBMIT"
-        isDisabled={!formUsername.trim()}
+        isDisabled={!userNameRegex.test(formUsername)}
         handleClick={handleOnSubmit}
       />
     </form>

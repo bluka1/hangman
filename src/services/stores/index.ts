@@ -10,3 +10,4 @@ export {
   resetState,
 } from './hangmanSlice';
 export { store, type RootState, type AppDispatch } from './store';
+export { setScores } from './scoresSlice';

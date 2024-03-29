@@ -7,7 +7,17 @@ const GameStatus = () => {
 
   const hangmanState = useSelector((state: RootState) => state.hangman);
   const wonOrLost = hangmanState.win ? 'YOU WON!' : 'YOU LOST :(';
-  const gameStatus = hangmanState.gameFinished ? `${wonOrLost}` : 'playing';
+
+  let gameStatus: string;
+  if (hangmanState.gameFinished) {
+    gameStatus = `${wonOrLost}`;
+  } else {
+    if (hangmanState.quote) {
+      gameStatus = 'playing';
+    } else {
+      gameStatus = 'not playing';
+    }
+  }
 
   const recalculateGameStatus = () => {
     let count = 0;
