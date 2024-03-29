@@ -4,7 +4,6 @@ export {
   type GameScore,
 } from './hangmanStoreTypes';
 export { type Quote } from './quoteType';
-export { type Page } from './pageType';
 export {
   type Score,
   type ScoresState,
