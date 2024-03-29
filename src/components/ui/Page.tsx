@@ -1,4 +1,4 @@
-import { PageType } from '../../models';
+import { PageType } from '../../models/pageType';
 
 const Page = ({ description, children }: PageType) => {
   const descriptionContent =
