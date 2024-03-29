@@ -24,7 +24,7 @@ const LoginPage = () => {
         Please enter your username to play the game.
       </p>
       <p className="page-description warning-border">
-        Only letters allowed. Username can not be bigger than 20 characters.
+        Only letters allowed. Username can not contain more than 20 characters.
       </p>
     </>
   );
