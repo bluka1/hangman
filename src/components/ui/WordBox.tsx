@@ -13,7 +13,7 @@ const WordBox = ({ word }: { word: string }) => {
         guessedLetters.includes(letter.toLowerCase()) ||
         (letter.charCodeAt(0) >= 32 && letter.charCodeAt(0) <= 64)
       ) {
-        lettersBox.push(<LetterBox letter={letter} className={''} />);
+        lettersBox.push(<LetterBox letter={letter} className={null} />);
       } else {
         lettersBox.push(<LetterBox letter={'*'} className={'underline'} />);
       }

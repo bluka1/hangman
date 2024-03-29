@@ -26,7 +26,7 @@ const GamePage = () => {
   const [showTryAgain, setShowTryAgain] = useState(false);
 
   const description =
-    'The game has started. Start typing on your keyboard or just press the letters you see on the screen. Only letters allowed!';
+    'The game has started. Start typing on your keyboard. Only letters allowed!';
 
   useEffect(() => {
     if (!hangmanState.gameFinished) {

@@ -3,7 +3,7 @@ const LetterBox = ({
   className,
 }: {
   letter: string;
-  className: string;
+  className: string | null;
 }) => {
   return <span className={`${className} letter-box`}>{letter}</span>;
 };
