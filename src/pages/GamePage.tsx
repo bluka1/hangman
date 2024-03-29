@@ -13,7 +13,7 @@ import {
 } from '../services/stores/hangmanSlice';
 import { LoadingContext } from '../context';
 import { RootState, setScores } from '../services/stores';
-import { Button, GameStatus, LetterBox, Page } from '../components';
+import { Button, GameStatus, Page, WordBox } from '../components';
 import { extractUniqueLetters, normalizeScores, sortScores } from '../utils';
 import { HighscoresRecord, Quote } from '../models';
 
@@ -168,8 +168,8 @@ const GamePage = () => {
       <div className="hangman-quote">
         {hangmanState.quote ? (
           <>
-            {hangmanState.quote.split('').map((char) => (
-              <LetterBox key={Math.random().toFixed(9)} letter={char} />
+            {hangmanState.quote.split(' ').map((word) => (
+              <WordBox word={word} />
             ))}
           </>
         ) : null}

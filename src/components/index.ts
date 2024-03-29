@@ -6,3 +6,4 @@ export { default as Page } from './ui/Page';
 export { default as LetterBox } from './ui/LetterBox';
 export { default as GameStatus } from './ui/GameStatus';
 export { default as Loading } from './ui/Loading';
+export { default as WordBox } from './ui/WordBox';

@@ -169,6 +169,11 @@ body {
   padding: 1rem 0;
 }
 
+.word-box {
+  display: flex;
+  margin: 0 0.5rem;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
