@@ -1,12 +1,12 @@
 # Hangman
 
-Example game I was following: [here](https://www.hangmanwords.com/play/custom?g=VGhpcyUyMGlzJTIwYW4lMjBleGFtcGxlJTIwaGFuZ21hbiUyMGdhbWUu)
+Example game I was following: [here](https://www.hangmanwords.com/play/custom?g=VGhpcyUyMGlzJTIwYW4lMjBleGFtcGxlJTIwaGFuZ21hbiUyMGdhbWUu).
 
-Try this game out by visiting this [link](https://hangman-uvdb.onrender.com).
+Try this game out by visiting this [link](https://hangman-b4lb3wvqj-bluka1s-projects.vercel.app/).
 
 ## Installation
 
-- `git clone` + link to repo
+- clone the repo locally - run `git clone` + link to this repo
 - run `npm ci`
 
 ## Running the app locally
