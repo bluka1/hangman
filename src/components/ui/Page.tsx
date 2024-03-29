@@ -1,6 +1,10 @@
-import { Page as PageType } from '../../models/pageType';
-
-const Page = ({ description, children }: PageType) => {
+const Page = ({
+  description,
+  children,
+}: {
+  children?: any;
+  description: string | React.ReactElement;
+}) => {
   const descriptionContent =
     typeof description === 'string' ? (
       <p className="page-description">{description}</p>
