@@ -1,4 +1,4 @@
-export type PageType = {
+export type Page = {
   children?: any;
   description: string | React.ReactElement;
 };
