@@ -44,10 +44,7 @@ describe('test advanced score calculation', () => {
     expect(longer2).toBeGreaterThan(shorter2);
 
     const longer3 = calculateScoreAdvanced(30, 15, 3, 100000);
-    console.log('longer', longer3);
-
     const shorter3 = calculateScoreAdvanced(15, 15, 3, 100000);
-    console.log('shorter', shorter3);
 
     expect(longer3).toBeGreaterThan(shorter3);
   });
